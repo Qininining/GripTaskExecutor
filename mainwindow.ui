@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1283</width>
+    <width>716</width>
     <height>871</height>
    </rect>
   </property>
@@ -228,8 +228,8 @@ border-width: 1px;border-style: solid;border-color: rgb(0, 0, 0);</string>
    <widget class="QWidget" name="widget_9" native="true">
     <property name="geometry">
      <rect>
-      <x>350</x>
-      <y>120</y>
+      <x>50</x>
+      <y>470</y>
       <width>241</width>
       <height>311</height>
      </rect>
@@ -423,8 +423,8 @@ border-width: 1px;border-style: solid;border-color: rgb(0, 0, 0);</string>
    <widget class="QWidget" name="widget_7" native="true">
     <property name="geometry">
      <rect>
-      <x>780</x>
-      <y>80</y>
+      <x>320</x>
+      <y>170</y>
       <width>341</width>
       <height>581</height>
      </rect>
@@ -1021,7 +1021,7 @@ border-width: 1px;border-style: solid;border-color: rgb(0, 0, 0);</string>
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1283</width>
+     <width>716</width>
      <height>21</height>
     </rect>
    </property>

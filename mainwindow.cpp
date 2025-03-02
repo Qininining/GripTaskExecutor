@@ -59,6 +59,75 @@ void MainWindow::updateGUI()
     ui->lineEdit_Sta_G->setText(QString::number(data_.gripperData.sta));
 }
 
+
+
+void MainWindow::keyPressEvent(QKeyEvent *event)
+{
+    int distance = 1000000;
+    qDebug() << "Key pressed:" << event->key();
+    QMainWindow::keyPressEvent(event); // Call base class implementation
+
+    bool ctrlPressed = event->modifiers() & Qt::ControlModifier;
+
+    switch (event->key())
+    {
+        case Qt::Key_W:
+            if (ctrlPressed) {
+                gripTaskExecutor_->gotoPositionRelativeRX(distance); // Rotate Y axis clockwise
+            } else {
+                gripTaskExecutor_->gotoPositionRelativeX(distance); // Move Y axis forward
+            }
+            break;
+        case Qt::Key_S:
+            if (ctrlPressed) {
+                gripTaskExecutor_->gotoPositionRelativeRX(-distance); // Rotate Y axis counterclockwise
+            } else {
+                gripTaskExecutor_->gotoPositionRelativeX(-distance); // Move Y axis backward
+            }
+            break;
+        case Qt::Key_A:
+            if (ctrlPressed) {
+                gripTaskExecutor_->gotoPositionRelativeRY(-distance); // Rotate Y axis clockwise
+            } else {
+                gripTaskExecutor_->gotoPositionRelativeY(-distance); // Move Y axis left
+            }
+            break;
+        case Qt::Key_D:
+            if (ctrlPressed) {
+                gripTaskExecutor_->gotoPositionRelativeRY(distance); // Rotate Y axis counterclockwise
+            } else {
+                gripTaskExecutor_->gotoPositionRelativeY(distance); // Move Y axis right
+            }
+            break;
+        case Qt::Key_Q:
+            if (ctrlPressed) {
+                gripTaskExecutor_->gotoPositionRelativeRZ(distance); // Rotate Z axis clockwise
+            } else {
+                gripTaskExecutor_->gotoPositionRelativeZ(distance); // Move Z axis up
+            }
+            break;
+        case Qt::Key_E:
+            if (ctrlPressed) {
+                gripTaskExecutor_->gotoPositionRelativeRZ(-distance); // Rotate Z axis counterclockwise
+            } else {
+                gripTaskExecutor_->gotoPositionRelativeZ(-distance); // Move Z axis down
+            }
+            break;
+        case Qt::Key_G:
+            gripTaskExecutor_->grip(); // Grip
+            break;
+        case Qt::Key_R:
+            gripTaskExecutor_->release(); // Release
+            break;
+        default:
+            break;
+    }
+}
+
+
+
+
+
 void MainWindow::on_Connect_clicked(bool checked)
 {
     if (checked) {

@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QMessageBox>
+#include <QKeyEvent>
 #include "GripTaskExecutor.h"
 
 QT_BEGIN_NAMESPACE
@@ -38,12 +39,15 @@ private slots:
 
     void on_Btu_RX_V_clicked(bool checked);
 
+    void on_Reference_clicked();
 
 private slots:
     void updateGUI();
 
+protected:
+    void keyPressEvent(QKeyEvent *event) override;
 
-    void on_Reference_clicked();
+
 
 private:
     Ui::MainWindow *ui;
