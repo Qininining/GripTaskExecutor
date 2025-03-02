@@ -98,19 +98,21 @@ void Gripper::run() {
         }
         else if(taskState_ == Grip)
         {
-            if(gripperData_.forceValue_X >= -20000)
+            if(gripperData_.forceValue_X >= -50000)
             {
                 forceSensor_->setReferenceZeroCH2();
                 motionPlatform_->setVelocity(-1000000, 25000000);
-                while (gripperData_.forceValue_X >= -5000 && running_ && taskState_ == Grip) {
-                    qDebug() << "11111111" << gripperData_.forceValue_X;
+                while (gripperData_.forceValue_X >= -gripForce_ && running_ && taskState_ == Grip) {
+                    // qDebug() << "11111111" << gripperData_.forceValue_X;
                     QThread::msleep(10); // 休眠100毫秒
                 }
                 motionPlatform_->stop();
-
                 // motionPlatform_->gotoPositionRelative(1)
             }
-            qDebug() << "夹爪夹持力不为空";
+            else
+            {
+                qDebug() << "夹爪夹持力不为空";
+            }
             taskState_ = Free;
         }
         else if(taskState_ == Release)
@@ -155,8 +157,8 @@ void Gripper::update() {
     motionPlatform_->getPosition(gripperData_.position);
     motionPlatform_->getVelocity(gripperData_.velocity);
     motionPlatform_->getsta(gripperData_.sta);
-    qDebug() << "forceValue_X: " << gripperData_.forceValue_X
-             << "forceValue_Z: " << gripperData_.forceValue_Z;
+    // qDebug() << "forceValue_X: " << gripperData_.forceValue_X
+    //          << "forceValue_Z: " << gripperData_.forceValue_Z;
     //          << "position: " << gripperData_.position
     //          << "velocity: " << gripperData_.velocity
     //          << "sta: " << gripperData_.sta;

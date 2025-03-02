@@ -31,7 +31,7 @@ public:
     bool shutdown();
 
 
-    bool grip(int force = 50000); //默认夹持力为50000微牛
+    bool grip(int force = 100000); //默认夹持力为50000微牛
     bool release();
 
     bool findReference();

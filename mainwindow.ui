@@ -424,9 +424,9 @@ border-width: 1px;border-style: solid;border-color: rgb(0, 0, 0);</string>
     <property name="geometry">
      <rect>
       <x>320</x>
-      <y>170</y>
+      <y>110</y>
       <width>341</width>
-      <height>581</height>
+      <height>681</height>
      </rect>
     </property>
     <widget class="QLabel" name="label_25">
@@ -435,7 +435,7 @@ border-width: 1px;border-style: solid;border-color: rgb(0, 0, 0);</string>
        <x>10</x>
        <y>10</y>
        <width>321</width>
-       <height>561</height>
+       <height>661</height>
       </rect>
      </property>
      <property name="styleSheet">
@@ -446,7 +446,7 @@ border-width: 1px;border-style: solid;border-color: rgb(0, 0, 0);</string>
       <string/>
      </property>
     </widget>
-    <widget class="QWidget" name="">
+    <widget class="QWidget" name="layoutWidget">
      <property name="geometry">
       <rect>
        <x>20</x>
@@ -993,14 +993,76 @@ border-width: 1px;border-style: solid;border-color: rgb(0, 0, 0);</string>
       </item>
      </layout>
     </widget>
-    <zorder>label_25</zorder>
-    <zorder>layoutWidget_7</zorder>
-    <zorder>layoutWidget_8</zorder>
-    <zorder>lineEdit_Pos_G</zorder>
-    <zorder>lineEdit_Sta_G</zorder>
-    <zorder>label_16</zorder>
-    <zorder>lineEdit_Vel_G</zorder>
-    <zorder>horizontalSpacer</zorder>
+    <widget class="QWidget" name="">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>570</y>
+       <width>231</width>
+       <height>81</height>
+      </rect>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_2">
+      <item row="0" column="0">
+       <widget class="QLabel" name="label_18">
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>X Force：</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QLabel" name="lineEdit_Force_X">
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>0</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="label_20">
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>Z Force：</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QLabel" name="lineEdit_Force_Z">
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>0</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
    </widget>
    <widget class="QPushButton" name="Reference">
     <property name="geometry">

@@ -4,8 +4,9 @@
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
-    , gripTaskExecutor_(new GripTaskExecutor("usb:id:0497537675", "usb:id:4997391945", "usb:id:7027461260", "COM3"))
+    , gripTaskExecutor_(new GripTaskExecutor("usb:id:0497537675", "usb:id:4997391945", "usb:id:7027461260", "COM10"))
     , updatetimer_(new QTimer())
+    , speedModeEnabled(false)
 {
     ui->setupUi(this);
 
@@ -57,46 +58,70 @@ void MainWindow::updateGUI()
     ui->lineEdit_Pos_G->setText(QString::number(data_.gripperData.position, 'f', 0));
     ui->lineEdit_Vel_G->setText(QString::number(data_.gripperData.velocity, 'f', 0));
     ui->lineEdit_Sta_G->setText(QString::number(data_.gripperData.sta));
+
+    ui->lineEdit_Force_X->setText(QString::number(data_.gripperData.forceValue_X, 'f', 0));
+    ui->lineEdit_Force_Z->setText(QString::number(data_.gripperData.forceValue_Z, 'f', 0));
 }
 
+void MainWindow::keyReleaseEvent(QKeyEvent *event)
+{
+    if(!event->isAutoRepeat())
+    {
+        qDebug() << "Key released:" << event->key();
+        QMainWindow::keyReleaseEvent(event); // 调用基类实现
 
+        // 关闭速度模式
+        gripTaskExecutor_->closeVelocityMode(); // 假设存在这样一个方法来禁用速度模式
+        speedModeEnabled = false;
+    }
+
+}
 
 void MainWindow::keyPressEvent(QKeyEvent *event)
 {
-    int distance = 1000000;
-    qDebug() << "Key pressed:" << event->key();
-    QMainWindow::keyPressEvent(event); // Call base class implementation
-
-    bool ctrlPressed = event->modifiers() & Qt::ControlModifier;
-
-    switch (event->key())
+    if(!event->isAutoRepeat())
     {
+        int distance = 10000000;
+        int velocity = 150000;
+        qDebug() << "Key pressed:" << event->key();
+        QMainWindow::keyPressEvent(event); // Call base class implementation
+
+        bool ctrlPressed = event->modifiers() & Qt::ControlModifier;
+
+        gripTaskExecutor_->setVelocityMode(velocity, velocity, velocity, velocity, velocity, velocity);
+
+        switch (event->key())
+        {
+        case Qt::Key_Shift:
+            gripTaskExecutor_->stopMotion();
+            break;
+
         case Qt::Key_W:
-            if (ctrlPressed) {
-                gripTaskExecutor_->gotoPositionRelativeRX(distance); // Rotate Y axis clockwise
-            } else {
-                gripTaskExecutor_->gotoPositionRelativeX(distance); // Move Y axis forward
-            }
-            break;
-        case Qt::Key_S:
-            if (ctrlPressed) {
-                gripTaskExecutor_->gotoPositionRelativeRX(-distance); // Rotate Y axis counterclockwise
-            } else {
-                gripTaskExecutor_->gotoPositionRelativeX(-distance); // Move Y axis backward
-            }
-            break;
-        case Qt::Key_A:
             if (ctrlPressed) {
                 gripTaskExecutor_->gotoPositionRelativeRY(-distance); // Rotate Y axis clockwise
             } else {
                 gripTaskExecutor_->gotoPositionRelativeY(-distance); // Move Y axis left
             }
             break;
-        case Qt::Key_D:
+        case Qt::Key_S:
             if (ctrlPressed) {
                 gripTaskExecutor_->gotoPositionRelativeRY(distance); // Rotate Y axis counterclockwise
             } else {
                 gripTaskExecutor_->gotoPositionRelativeY(distance); // Move Y axis right
+            }
+            break;
+        case Qt::Key_A:
+            if (ctrlPressed) {
+                gripTaskExecutor_->gotoPositionRelativeRX(distance); // Rotate Y axis clockwise
+            } else {
+                gripTaskExecutor_->gotoPositionRelativeX(distance); // Move Y axis forward
+            }
+            break;
+        case Qt::Key_D:
+            if (ctrlPressed) {
+                gripTaskExecutor_->gotoPositionRelativeRX(-distance); // Rotate Y axis counterclockwise
+            } else {
+                gripTaskExecutor_->gotoPositionRelativeX(-distance); // Move Y axis backward
             }
             break;
         case Qt::Key_Q:
@@ -121,6 +146,7 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
             break;
         default:
             break;
+        }
     }
 }
 
