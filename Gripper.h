@@ -12,6 +12,12 @@ struct GripperData {
     int position;
     int velocity;
     unsigned int sta;
+    GripperData()
+        : forceValue_X(0)
+        , forceValue_Z(0)
+        , position(0)
+        , velocity(0)
+        , sta(0) {}
 };
 
 class Gripper : public QThread {
@@ -28,9 +34,13 @@ public:
     bool release();
     bool initialize();
     bool shutdown();
+
+
     void run() override;
     void stop();
     void startThread();
+
+
     void getData(GripperData &data) const;
 
     enum TaskState {
