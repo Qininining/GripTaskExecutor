@@ -149,7 +149,7 @@ void Manipulator::update()
     manipulatorData_.angularStatus = jointAngularStatus;
 }
 
-bool Manipulator::getManipulatorData(ManipulatorData &manipulatorData) const
+bool Manipulator::getData(ManipulatorData &manipulatorData) const
 {
     manipulatorData = manipulatorData_;
     return true;

@@ -33,11 +33,11 @@ bool GripTaskExecutor::shutdown()
 
 void GripTaskExecutor::update()
 {
-    manipulator_->getManipulatorData(gripTaskData_.manipulatorData);
+    manipulator_->getData(gripTaskData_.manipulatorData);
     gripper_->getData(gripTaskData_.gripperData);
 }
 
-bool GripTaskExecutor::getGripTaskData(GripTaskData &gripTaskData)
+bool GripTaskExecutor::getData(GripTaskData &gripTaskData)
 {
     gripTaskData = gripTaskData_;
     return true;
@@ -46,6 +46,13 @@ bool GripTaskExecutor::getGripTaskData(GripTaskData &gripTaskData)
 void GripTaskExecutor::run()
 {
 
+}
+
+bool GripTaskExecutor::findReference()
+{
+    manipulator_->findReference();
+    gripper_->findReference();
+    return true;
 }
 
 bool GripTaskExecutor::grip(int force)

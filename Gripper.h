@@ -26,14 +26,16 @@ public:
     Gripper(const char* deviceID, const QString &portName);
     ~Gripper();
 
-    void open();
-    void close();
-    bool isOpen() const;
-    bool isClosed() const;
-    bool grip(int force = 50000); //默认夹持力为50000微牛
-    bool release();
+
     bool initialize();
     bool shutdown();
+
+
+    bool grip(int force = 50000); //默认夹持力为50000微牛
+    bool release();
+
+    bool findReference();
+
 
 
     void run() override;

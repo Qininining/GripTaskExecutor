@@ -25,23 +25,6 @@ Gripper::~Gripper() {
     delete forceSensor_; // 释放 ForceSensor 对象
 }
 
-void Gripper::open() {
-    openState_ = true;
-}
-
-void Gripper::close() {
-    openState_ = false;
-}
-
-bool Gripper::isOpen() const {
-    return openState_;
-}
-
-bool Gripper::isClosed() const {
-    return !openState_;
-}
-
-
 bool Gripper::initialize() {
     bool result = motionPlatform_->connect();
     result &= forceSensor_->connect();
@@ -75,7 +58,7 @@ void Gripper::startThread()
 
 
 bool Gripper::grip(int force) {
-    if(isOpen() && taskState_ == Free)
+    if(openState_ && taskState_ == Free)
     {
         gripForce_ = force;
         taskState_ = Grip;
@@ -85,9 +68,18 @@ bool Gripper::grip(int force) {
 }
 
 bool Gripper::release() {
-    if(isOpen())
+    if(openState_)
     {
         taskState_ = Release;
+        return false;
+    }
+    return false;
+}
+
+bool Gripper::findReference() {
+    if(openState_)
+    {
+        motionPlatform_->findReference();
         return false;
     }
     return false;

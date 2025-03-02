@@ -89,7 +89,7 @@ public:
     bool gotoPositionRelativeRZ(int diffAngleZ);
 
     // get Data functions
-    bool getManipulatorData(ManipulatorData &manipulatorData) const;
+    bool getData(ManipulatorData &manipulatorData) const;
 
     bool findReference();
 

@@ -67,7 +67,9 @@ public:
     bool gotoPositionRelativeRY(int diffAngleY);
     bool gotoPositionRelativeRZ(int diffAngleZ);
 
-    bool getGripTaskData(GripTaskData &gripTaskData);
+    bool findReference();
+
+    bool getData(GripTaskData &gripTaskData);
 
 
 private:
