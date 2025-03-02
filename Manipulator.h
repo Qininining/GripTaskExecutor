@@ -44,8 +44,8 @@ public:
     Manipulator(const char* MotionID, const char* AngleID);
     ~Manipulator();
 
-    void initialize();
-    void shutdown();
+    bool initialize();
+    bool shutdown();
 
     // Motion control functions
     bool gotoPositionAbsolute(int positionX, int positionY, int positionZ, int angleX, int angleY, int angleZ);

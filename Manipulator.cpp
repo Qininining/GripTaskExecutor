@@ -49,7 +49,7 @@ Manipulator::~Manipulator()
     delete updateTimer_;
 }
 
-void Manipulator::initialize()
+bool Manipulator::initialize()
 {
     bool connectedX = p_X_->connect();
     bool connectedY = p_Y_->connect();
@@ -62,13 +62,15 @@ void Manipulator::initialize()
         updateTimer_->start(20); // Update every 20ms
         isOpen_ = true;
         qDebug() << "Manipulator initialized successfully!";
+        return true;
     } else {
         isOpen_ = false;
         qDebug() << "Failed to initialize manipulator!";
+        return false;
     }
 }
 
-void Manipulator::shutdown()
+bool Manipulator::shutdown()
 {
     updateTimer_->stop();
     p_X_->disconnect();
@@ -78,6 +80,7 @@ void Manipulator::shutdown()
     p_RY_->disconnect();
     p_RZ_->disconnect();
     isOpen_ = false;
+    return true;
 }
 
 void Manipulator::update()

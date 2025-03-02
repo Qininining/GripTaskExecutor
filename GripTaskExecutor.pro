@@ -11,6 +11,7 @@ CONFIG += c++17
 SOURCES += \
     AnglePlatform.cpp \
     ForceSensor.cpp \
+    GripTaskExecutor.cpp \
     Gripper.cpp \
     Manipulator.cpp \
     MotionPlatform.cpp \
@@ -21,6 +22,7 @@ SOURCES += \
 HEADERS += \
     AnglePlatform.h \
     ForceSensor.h \
+    GripTaskExecutor.h \
     Gripper.h \
     Manipulator.h \
     MotionPlatform.h \
